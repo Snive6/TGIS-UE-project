@@ -1,12 +1,11 @@
 import numpy as np
-from numpy import inf
 
 
 class AntColony:
     def __init__(self, distances: list, n_ants: int, n_best: int, n_iters: int, pheromone_decay: int,
                  alpha: int = 1, beta: int = 1):
         self.distances = distances
-        self.pheromone = np.ones(self.distances.shape) / len(distances)
+        self.pheromone = ...
         self.points = range(len(distances))
         self.n_ants = n_ants
         self.n_best = n_best
@@ -15,6 +14,17 @@ class AntColony:
         self.alpha = alpha
         self.beta = beta
 
+    # TODO: Main function to run code
+
+    # TODO: Function to select best iteration
+
+    # TODO: Function with spreading pheromone
+
+    # TODO: Function to choose path
+
+    # TODO: Function to save path
+
+    # TODO: ...
 
 if __name__ == '__main__':
     d = np.array([[0, 10, 12, 11, 14],
@@ -24,7 +34,7 @@ if __name__ == '__main__':
                   [14, 8, 14, 16, 0]])
 
     iteration = 100
-    n_ants = 5
-    n_cities = 5
+    ants = 5
+    cities = 5
 
     print(np.ones(d.shape) / len(d))
