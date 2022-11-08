@@ -24,6 +24,7 @@ class AntColony:
 
     # TODO: ...
 
+
 if __name__ == '__main__':
     d = np.array([[0, 10, 12, 11, 14],
                   [10, 0, 13, 15, 8],
@@ -34,5 +35,3 @@ if __name__ == '__main__':
     iteration = 100
     ants = 5
     cities = 5
-
-    print(np.ones(d.shape) / len(d))
