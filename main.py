@@ -16,13 +16,11 @@ class AntColony:
 
     # TODO: Main function to run code
 
-    # TODO: Function to select best iteration
-
     # TODO: Function with spreading pheromone
 
     # TODO: Function to choose path
 
-    # TODO: Function to save path
+    # TODO: Function to save best path
 
     # TODO: ...
 
