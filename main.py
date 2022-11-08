@@ -16,11 +16,11 @@ class AntColony:
 
     # TODO: Main function to run code
 
-    # TODO: Function with spreading pheromone
+    # TODO: Function (two or three) to generate path, every iteration with different (random) start city
 
-    # TODO: Function to choose path
+    # TODO: Function with spreading pheromone to choose better distance
 
-    # TODO: Function to save best path
+    # TODO: Function to choose best path
 
     # TODO: ...
 
