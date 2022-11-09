@@ -2,6 +2,24 @@ import numpy as np
 
 
 class AntColony:
+    """
+    Parameters
+    ----------
+    distances : List
+        Square matrix of distances.
+    n_ants : int
+        Number of ants in each iteration
+    n_best : int
+        Number of the best ants with pheromone
+    n_iters : int
+        Number of iterations
+    pheromone_decay : float
+        Decay rate of pheromone. If rate is lower, decay is faster.*
+    alpha : float
+        Exponent on pheromone. Higher alpha = greater pheromone weight. Default = 1.
+    beta: float
+        Exponent on distance. Higher beta = greater distance weight. Default = 1.
+    """
     def __init__(self, distances: list, n_ants: int, n_best: int, n_iters: int, pheromone_decay: int,
                  alpha: int = 1, beta: int = 1):
         self.distances = distances
