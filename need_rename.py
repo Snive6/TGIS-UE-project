@@ -9,7 +9,6 @@ def initialize(path):
 def calc_distance(distances, route):
     path_distance = []
     for i in range(len(distances)-1):
-        print(route[i], route[i+1])
         path_distance.append(distances[route[i]][route[i+1]])
     return path_distance
 
