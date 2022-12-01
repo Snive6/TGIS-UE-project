@@ -36,8 +36,9 @@ def route_add(figure, points: list, route: list):
     figure.add_scatter(x=x1, y=x2, name='droga')
 
 
-p = [(1.0, 2.0), (3.0, 2.0), (2.0, 4.0), (5.0, 1.0)]
-r = [1, 3, 0, 2]
-fig = mapa(p)
-route_add(fig, p, r)
-fig.show()
+if __name__ == '__main__':
+    p = [(1.0, 2.0), (3.0, 2.0), (2.0, 4.0), (5.0, 1.0)]
+    r = [1, 3, 0, 2]
+    fig = mapa(p)
+    route_add(fig, p, r)
+    fig.show()
