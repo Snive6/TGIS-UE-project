@@ -31,7 +31,7 @@ def route_add(figure, points: list, route: list):
     size[route[0]] = 15
     symbol = [trace.marker.symbol] * n
     symbol[route[0]] = "star"
-    fig.update_traces(marker=dict(color=color, size=size, symbol=symbol))
+    figure.update_traces(marker=dict(color=color, size=size, symbol=symbol))
 
     figure.add_scatter(x=x1, y=x2, name='droga')
 
