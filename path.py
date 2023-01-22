@@ -2,6 +2,7 @@ from math import sqrt
 import plotly.express as px
 
 
+
 def distance_calk(points: list):
     distance = []
     for p1 in points:
@@ -41,4 +42,9 @@ if __name__ == '__main__':
     r = [1, 3, 0, 2]
     fig = mapa(p)
     route_add(fig, p, r)
+    fig.show()
+
+def draw_path(points: list, route: list):
+    fig = mapa(points)
+    route_add(fig, points, route)
     fig.show()

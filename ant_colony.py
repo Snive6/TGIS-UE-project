@@ -1,11 +1,9 @@
 import numpy as np
 from numpy import inf
-from read_data import read_data
 from path import distance_calk
 
-def ant_search(data_source: str):
+def ant_search(data):
     # Create distance matrix from data
-    data = read_data(data_source)
     distance_list = (distance_calk(data))
     distance_matrix = np.array(distance_list)
 
