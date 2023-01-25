@@ -11,6 +11,4 @@ print('Cost of the chosen path: ', best_cost)
 route = [int(x)-1 for x in best_route.tolist()]
 print(route)
 
-
 draw_path(data, route)
-

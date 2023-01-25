@@ -2,7 +2,6 @@ from math import sqrt
 import plotly.express as px
 
 
-
 def distance_calk(points: list):
     distance = []
     for p1 in points:
@@ -21,7 +20,6 @@ def mapa(points: list):
 
 def route_add(figure, points: list, route: list):
     newlist = [points[i] for i in route]
-    newlist.append(newlist[0])
     x1, x2 = map(list, zip(*newlist))
 
     trace = next(figure.select_traces())
@@ -37,14 +35,15 @@ def route_add(figure, points: list, route: list):
     figure.add_scatter(x=x1, y=x2, name='droga')
 
 
+def draw_path(points: list, route: list):
+    figure = mapa(points)
+    route_add(figure, points, route)
+    figure.show()
+
+
 if __name__ == '__main__':
     p = [(1.0, 2.0), (3.0, 2.0), (2.0, 4.0), (5.0, 1.0)]
     r = [1, 3, 0, 2]
     fig = mapa(p)
     route_add(fig, p, r)
-    fig.show()
-
-def draw_path(points: list, route: list):
-    fig = mapa(points)
-    route_add(fig, points, route)
     fig.show()
