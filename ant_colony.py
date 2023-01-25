@@ -1,24 +1,21 @@
 import numpy as np
-from numpy import inf
 from path import distance_calk
 
-def ant_search(data):
+
+def ant_search(data, iterations=400, n_ants=50):
     # Create distance matrix from data
     distance_list = (distance_calk(data))
     distance_matrix = np.array(distance_list)
 
     # Initialization
-    iterations = 300
-    n_ants = 4
     n_cities = len(data)
-    e = .2        # evaporation rate
-    alpha = 1     # pheromone factor
-    beta = 2       # visibility factor
+    e = .2  # evaporation rate
+    alpha = 1  # pheromone factor
+    beta = 2  # visibility factor
 
     # calculating the visibility of the next city visibility(i,j)=1/d(i,j)
-
-    visibility = 1/distance_matrix
-    visibility[visibility == inf] = 0
+    visibility = np.array([[1 / dist if dist != 0 else 0 for dist in distance_point]
+                           for distance_point in distance_matrix])
 
     # initializing pheromone present at the paths to the cities
     pheromone = np.ones((n_cities, n_cities))
@@ -26,7 +23,9 @@ def ant_search(data):
     # initializing the route of the ants with size rute(n_ants,n_cities+1)
     # note adding 1 because we want to come back to the source city
 
-    route = np.ones((n_ants, n_cities+1))
+    route = np.ones((n_ants, n_cities + 1))
+    best_route = 0
+    dist_min_cost = 0
 
     for iteration in range(iterations):
 
@@ -37,10 +36,6 @@ def ant_search(data):
             temp_visibility = np.array(visibility)  # creating a copy of visibility
 
             for j in range(n_cities - 1):
-
-                combine_feature = np.zeros(n_cities)  # initializing combine_feature array to zero
-                cum_prob = np.zeros(n_cities)  # initializing cumulative probability array to zeros
-
                 cur_loc = int(route[i, j] - 1)  # current city of the ant
 
                 temp_visibility[:, cur_loc] = 0  # making visibility of the current city as zero
@@ -52,18 +47,14 @@ def ant_search(data):
                 v_feature = v_feature[:, np.newaxis]  # adding axis
 
                 combine_feature = np.multiply(p_feature, v_feature)  # calculating the combine feature
-
                 total = np.sum(combine_feature)  # sum of all the feature
 
                 probs = combine_feature / total  # finding probability of element probs(i) = combine_feature(i)/total
 
                 cum_prob = np.cumsum(probs)  # calculating cumulative sum
-                # print(cum_prob)
                 r = np.random.random_sample()  # random no in [0,1)
-                # print(r)
-                city = np.nonzero(cum_prob > r)[0][0] + 1  # finding the next city having probability higher than
-                # random(r)
-                # print(city)
+                # finding the next city having probability higher than random(r)
+                city = np.nonzero(cum_prob > r)[0][0] + 1
 
                 route[i, j + 1] = city  # adding city to route
 
@@ -80,7 +71,8 @@ def ant_search(data):
 
             s = 0
             for j in range(n_cities - 1):
-                s = s + distance_matrix[int(rute_opt[i, j]) - 1, int(rute_opt[i, j + 1]) - 1]  # calcualating total tour distance
+                s = s + distance_matrix[int(rute_opt[i, j]) - 1, int(rute_opt[i, j + 1]) - 1]
+                # calcualating total tour distance
 
             dist_cost[i] = s  # storing distance of tour for 'i'th ant at location 'i'
 
@@ -93,11 +85,11 @@ def ant_search(data):
         for i in range(n_ants):
             for j in range(n_cities - 1):
                 dt = 1 / dist_cost[i]
-                pheromone[int(rute_opt[i, j]) - 1, int(rute_opt[i, j + 1]) - 1] = pheromone[int(rute_opt[i, j]) - 1, int(
-                    rute_opt[i, j + 1]) - 1] + dt
+                pheromone[int(rute_opt[i, j]) - 1, int(rute_opt[i, j + 1]) - 1] = \
+                    pheromone[int(rute_opt[i, j]) - 1, int(rute_opt[i, j + 1]) - 1] + dt
                 # updating the pheromone with delta_distance
                 # delta_distance will be more with min_dist i.e adding more weight to that route  pheromone
 
-    best_cost = int(dist_min_cost[0]) + distance_matrix[int(best_route[-2])-1, 0]
+    best_cost = int(dist_min_cost[0]) + distance_matrix[int(best_route[-2]) - 1, 0]
 
     return best_route, best_cost
